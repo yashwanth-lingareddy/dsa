@@ -18,3 +18,9 @@ def is_derived_string(X: str, Y: str) -> bool:
     if Y in new_string:
         return True
     return False
+
+if __name__=="__main__":
+    X = 'ABCD'
+    Y = 'DABC'
+    ans = is_derived_string(X, Y)
+    print(ans)
