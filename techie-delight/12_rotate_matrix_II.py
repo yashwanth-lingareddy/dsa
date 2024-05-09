@@ -55,7 +55,7 @@ def reverse_rows(matrix: List[List[int]]):
 def reverse_columns(matrix: List[List[int]]):
     for i in range(len(matrix) // 2):
         for j in range(len(matrix[i])):
-            matrix[i][j], matrix[len(matrix[i]) - i - 1][j] = matrix[len(matrix[i]) - i - 1][j], matrix[i][j]
+            matrix[i][j], matrix[len(matrix) - i - 1][j] = matrix[len(matrix) - i - 1][j], matrix[i][j]
 
 def rotate_matrix(matrix: List[List[int]]):
     reverse_rows(matrix=matrix)
