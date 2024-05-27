@@ -20,8 +20,6 @@ Hint: For BFS (Breath First Search) Queues must be used
 
 '''
 
-from typing import List
-
 class Node:
     def __init__(self, data = None, left=None, right=None) -> None:
         self.data = data	# data field
@@ -55,19 +53,19 @@ def find_level_order_traversal(root: Node):
     queue = [root]
 
     while len(queue) > 0:
-        result = []
+        this_level_items = []
         this_queue_length = len(queue)
 
         for i in range(this_queue_length):
             node = queue.pop(0)
-            result.append(node.data)
+            this_level_items.append(node.data)
 
             if node.left is not None:
                 queue.append(node.left)
             
             if node.right is not None:
                 queue.append(node.right)
-        ans = ans + result
+        ans = ans + this_level_items
     return ans
 
 if __name__=="__main__":
