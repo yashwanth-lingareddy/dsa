@@ -31,7 +31,7 @@ def find_max_product(nums: List[int]) -> int:
 
     for i in range(1, len(nums)):
         temp = max_ending_here
-        max_ending_here = max(nums[i], max(nums[i] * max_ending_here, nums[i] * min_ending_here))
+        max_ending_here = max(nums[i], max(nums[i] * temp, nums[i] * min_ending_here))
         min_ending_here = min(nums[i], min(nums[i] * temp, nums[i] * min_ending_here))
         max_so_far = max(max_so_far, max_ending_here)
 
