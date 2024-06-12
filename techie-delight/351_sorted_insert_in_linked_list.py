@@ -14,7 +14,6 @@ Output: 1 —> 2 —> 4 —> 5 —> 6 —> 8 —> 9 —> None
 
 '''
 from typing import List
-from collections import deque
 
 class Node:
     def __init__(self, data=None, next=None):
