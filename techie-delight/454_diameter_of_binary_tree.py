@@ -41,8 +41,6 @@ Note: Here diameter is longest path between any two leaf nodes
 
 '''
 
-from typing import List
-
 class Node:
     def __init__(self, data = None, left=None, right=None) -> None:
         self.data = data	# data field
