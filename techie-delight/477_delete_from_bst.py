@@ -85,20 +85,29 @@ def min_node(root: Node):
     return min_node(root.left)
 
 def delete_node(root: Node, key: int):
+    # Base case: if the tree is empty, return None
     if root is None:
         return None
+    
+    # Recursive case: Seachh for the key in the tree
     if key < root.data:
         root.left = delete_node(root.left, key)
     elif key > root.data:
         root.right = delete_node(root.right, key)
     else:
+        # Key Found
+        # Node with one or no child
         if root.left is None:
             return root.right
         elif root.right is None:
             return root.left
         else:
+            # Node with two children
+            # Find the successor (smallest node in the right subtree)
             successor = min_node(root.right)
+            # Replace the current Node's value with successor's value
             root.data = successor.data
+            # Delete the successor from the right subtree
             root.right = delete_node(root.right, successor.data)
     return root
 
