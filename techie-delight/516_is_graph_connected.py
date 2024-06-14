@@ -39,6 +39,8 @@ def bfs(start_vertex: int, graph: Graph):
     visited = set()
     while len(q) > 0:
         this_vertex = q.popleft()
+        if this_vertex in visited:
+            continue
         visited.add(this_vertex)
         neighbors = graph.adjList[this_vertex]
         for neighbor in neighbors:
