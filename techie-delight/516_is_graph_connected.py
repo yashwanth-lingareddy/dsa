@@ -39,11 +39,10 @@ def bfs(start_vertex: int, graph: Graph):
     visited = set()
     while len(q) > 0:
         this_vertex = q.popleft()
-        if this_vertex not in visited:
-            visited.add(this_vertex)
-            neighbors = graph.adjList[this_vertex]
-            
-            for neighbor in neighbors:
+        visited.add(this_vertex)
+        neighbors = graph.adjList[this_vertex]
+        for neighbor in neighbors:
+            if neighbor not in visited:
                 q.append(neighbor)
     return visited
 
@@ -57,8 +56,8 @@ def is_connected(graph: Graph):
     return True
 
 if __name__=="__main__":
-    edges = [(0, 1), (1, 2), (2, 3), (3, 5), (4, 6), (4, 8), (7, 8)]
-    n = 9
+    edges = [(0, 1), (1, 2), (2, 3), (3, 5), (4, 1)]
+    n = 6
     graph = Graph(n=n, edges=edges)
     ans = is_connected(graph=graph)
     print(ans)
