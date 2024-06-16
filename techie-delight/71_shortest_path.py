@@ -70,6 +70,7 @@ def find_shortest_path(mat: List[List[int]], src: Tuple[int], dest: Tuple[int]) 
             new_column = column + dir_column
 
             if is_valid_co_ordinates(m, n, (new_row, new_column)) and mat[new_row][new_column] == 1:
+                mat[new_row][new_column] = 0 # mark it as visited
                 queue.append((new_row, new_column, distance + 1))
 
     return -1
