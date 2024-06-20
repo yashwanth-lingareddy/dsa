@@ -51,7 +51,7 @@ def sort_array(nums: List[int]):
         heapify(nums, i, 0)
 
 
-# if this is not in place
+# sort in place  by using O(n) space
 def sort_not_in_place(nums: List[int]):
     ans = []
     heapq.heapify(nums) # O(n) complexity
