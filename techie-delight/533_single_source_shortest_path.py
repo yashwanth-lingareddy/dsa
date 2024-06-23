@@ -58,9 +58,10 @@ def find_shortest_distances(graph: Graph, source: int):
     while heap:
         current_distance, current_vertex = heapq.heappop(heap)
         
+        # still works without this condition
         # If we've found a longer path, skip
-        if current_distance > distances[current_vertex]:
-            continue
+        # if current_distance > distances[current_vertex]:
+        #     continue
         
         # Check all neighboring vertices
         for neighbor, weight in graph.adjList[current_vertex]:
