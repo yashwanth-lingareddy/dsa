@@ -85,60 +85,95 @@ def build_tree():
                     )
                 )
             )
-
         )
     )
     return tree
 
-def path_to_value(root: Node, path: List[int], val: int):
-    if root is None:
-        return False
-
-    path.append(root.data)
-
-    if root.data == val or path_to_value(root.left, path, val) or path_to_value(root.right, path, val):
-        return True
-    path.pop()
-    return False
-
-
-def build_jaffa():
+def build_x():
     return Node(
-        data=15,
+        data=3,
         left=Node(
-            data=10,
-            left=Node(
-                data=8
-            ),
+            data=6,
             right=Node(
-                data=12
-            )
-        ),
-        right=Node(
-            data=20,
-            left=Node(
-                data=16
-            ),
-            right=Node(
-                data=25
+                data=7,
+                left=Node(
+                    data=11,
+                    left=Node(
+                        data=14
+                    )
+                )
             )
         )
     )
 
-def is_ancestor_or_decendent(root: Node, v1: int, v2: int):
-    p1 = []
-    p2 = []
-    path_to_value(tree, p1, v1)
-    path_to_value(tree, p2, v2)
-    search_path = p1 if len(p1) >= len(p2) else p2
-    if v1 in search_path and v2 in search_path:
+def build_y():
+    return Node(
+        data=14
+    )
+
+def is_identical(x: Node, y: Node):
+    if x is None and y is None:
         return True
+    
+    if x is None or y is None:
+        return False
+    
+    identical = False
+
+    if x.data == y.data:
+        identical = True
+
+    return identical and is_identical(x.left, y.left) and is_identical(x.right, y.right)
+
+
+def find_path(root: Node, node: Node, path: List[int]):
+    if not root:
+        return False
+    
+    path.append(root)
+    
+    if is_identical(root, node):
+        return True
+    
+    if find_path(root.left, node, path) or find_path(root.right, node, path):
+        return True
+    
+    path.pop()
     return False
 
 
+def is_ancestor_or_decendent(root: Node, x: Node, y: Node):
+    # base
+    if not root or not x or not y:
+        return False
+    
+    # if x and y are same, they are neither accestor or descendents to each other
+    if x == y:
+        return False
+
+    path_x = []
+    path_y = []
+
+    find_path(root, x, path_x)
+    find_path(root, y, path_y)
+
+    if len(path_x) == 0 or len(path_y) == 0:
+        return False
+    
+    # they both might have exact same path
+    if len(path_x) == len(path_y):
+        return False
+    
+    # check if they have common path until the min length
+    for i in range(min(len(path_x), len(path_y))):
+        if not is_identical(path_x[i], path_y[i]):
+            return False
+    
+    return True
+
 if __name__=="__main__":
-    tree = build_tree()
-    v1 = 3
-    v2 = 14
-    ans = is_ancestor_or_decendent(tree, v1, v2)
+    root = build_tree()
+    x = build_x()
+    y = build_y()
+    ans = is_ancestor_or_decendent(root, x, y)
     print(ans)
