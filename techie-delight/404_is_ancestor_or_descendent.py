@@ -135,6 +135,10 @@ def find_path(root: Node, node: Node, path: List[int]):
     if is_identical(root, node):
         return True
     
+    # Use below lines instead of "is_identical" to get it worked in techiedelight complier
+    # if root == node:
+    #     return True 
+    
     if find_path(root.left, node, path) or find_path(root.right, node, path):
         return True
     
@@ -168,6 +172,9 @@ def is_ancestor_or_decendent(root: Node, x: Node, y: Node):
     for i in range(min(len(path_x), len(path_y))):
         if not is_identical(path_x[i], path_y[i]):
             return False
+        # Use below lines instead of "is_identical" to get it worked in techiedelight complier
+        # if path_x[i] != path_y[i]:
+        #     return False
     
     return True
 
