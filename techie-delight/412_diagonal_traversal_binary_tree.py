@@ -24,7 +24,7 @@ Explanation: The binary tree has three diagonals:
 
 '''
 
-from collections import deque, defaultdict
+from collections import deque
 
 class Node:
     def __init__(self, data = None, left=None, right=None) -> None:
