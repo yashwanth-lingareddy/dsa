@@ -76,7 +76,6 @@ def is_identical(x: Node, y: Node):
 
     return is_this_node_identical and is_identical(x.left, y.left) and is_identical(x.right, y.right)
 
-
 def root_to_node_path(root: Node, node: Node, path: List[Node]):
     if not root:
         return False
