@@ -7,8 +7,9 @@ Run this script from inside techie-delight folder
 '''
 import os
 
+total_questions = 580
+
 def check_completion():
-    total_questions = 580
     all_questions_dict = {i+1: {'status': 'not_completed'} for i in range(total_questions)}
     directory = "."
     files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
@@ -38,6 +39,8 @@ if __name__=="__main__":
     completed_question_numbers, not_completed_question_numbers = check_completion()
     print(f"Completed questions numbers: {', '.join(str(num) for num in completed_question_numbers)}")
     print(f"Not Completed questions numbers: {', '.join(str(num) for num in not_completed_question_numbers)}")
+    print(f"Completed percentage: {round((len(completed_question_numbers)/total_questions)*100, 2)}%")
+    print(f"Not Completed percentage: {round((len(not_completed_question_numbers)/total_questions)*100, 2)}%")
 
 
 
