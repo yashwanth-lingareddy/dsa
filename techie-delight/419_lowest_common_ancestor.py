@@ -65,12 +65,38 @@ def build_tree():
         )
     )
 
-def dfs(root: Node, target: int, path: List[Node]):
+def is_identical(x: Node, y: Node):
+    # if both the nodes are None, they are identical
+    if x is None and y is None:
+        return True
+    
+    # if any one is not none and the other one is none, they are not identical
+    if x is None or y is None:
+        return False
+    
+    is_this_node_identical = False
+
+    if x.data == y.data:
+        is_this_node_identical = True
+
+    return is_this_node_identical and is_identical(x.left, y.left) and is_identical(x.right, y.right)
+
+
+def dfs(root: Node, target: Node, path: List[Node]):
     if root is None:
         return False
     path.append(root)
-    if root.data == target or dfs(root.left, target, path) or dfs(root.right, target, path):
+    
+    if is_identical(root, target):
         return True
+
+    # use below lines instead of "is_identical" in techie delight compiler
+    # if root == target:
+    #     return True
+    
+    if dfs(root.left, target, path) or dfs(root.right, target, path):
+        return True
+
     path.pop()
     return False
 
@@ -85,18 +111,22 @@ def pre_order_traversal(root: Node, target: Node, path: List[int]):
 def find_LCA(root: Node, x: Node, y: Node):
     pathx = []
     pathy = []
-    dfs(root, x.data, pathx)
-    dfs(root, y.data, pathy)
-    print([i.data for i in pathx])
-    print([i.data for i in pathy])
+    
+    dfs(root, x, pathx)
+    dfs(root, y, pathy)
+    
     if len(pathx) == 0 or len(pathy) == 0:
         return None
     
     i = 0
 
     while i < min(len(pathx), len(pathy)):
-        if pathx[i].data != pathy[i].data:
+        if not is_identical(pathx[i], pathy[i]):
             break
+        
+        # use below lines instead of "is_identical" in techie delight compiler
+        # if pathx[i] != pathy[i]:
+        #     break
         i += 1
     
     if i > 0:
