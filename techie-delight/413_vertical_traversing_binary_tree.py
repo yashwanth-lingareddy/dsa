@@ -61,20 +61,26 @@ def vertical_traversal(root: Node):
         return []
 
     # Dictionary to store nodes by their horizontal distance
-    column_table = defaultdict(list)
+    view = defaultdict(list)
+    
     # Queue to perform BFS, storing nodes along with their horizontal distance
     queue = deque([(root, 0)])
 
     while queue:
-        node, column = queue.popleft()
-        column_table[column].append(node.data)
+        node, hd = queue.popleft()
+        
+        view[hd].append(node.data)
+        
+        # Enqueue the left child with a smaller horizontal distance
         if node.left:
-            queue.append((node.left, column - 1))
+            queue.append((node.left, hd - 1))
+        
+        # Enqueue the right child with a larger horizontal distance
         if node.right:
-            queue.append((node.right, column + 1))
+            queue.append((node.right, hd + 1))
     
     # Extract the entries from the column table, sorted by the column index
-    sorted_columns = sorted(column_table.items())
+    sorted_columns = sorted(view.items())
     
     # Flatten the result
     result = [val for column, values in sorted_columns for val in values]
