@@ -82,7 +82,7 @@ def find_min_depth(root: Node):
     while len(q) > 0:
         node, depth = q.popleft()
 
-        if not node.left and node.right:
+        if not node.left and not node.right:
             return depth
         
         if node.left:
