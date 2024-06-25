@@ -81,7 +81,6 @@ def dfs(root: Node, path: List[Node], k: int, result: Set[Node]):
     
     # if leaf node then return
     if not root.left and not root.right:
-        print(path)
         if k < len(path):
             result.add(path[len(path) - 1 - k])
         return
