@@ -64,24 +64,55 @@ def build_tree():
         )
     )
 
-def dfs(root: Node, target: int, path: List[int]):
-    if root is None:
+def is_identical(x: Node, y: Node):
+    # if both the nodes are None, they are identical
+    if x is None and y is None:
+        return True
+    
+    # if any one is not none and the other one is none, they are not identical
+    if x is None or y is None:
         return False
     
-    path.append(root.data)
-    if root.data == target or dfs(root.left, target, path) or dfs(root.right, target, path):
+    is_this_node_identical = False
+
+    if x.data == y.data:
+        is_this_node_identical = True
+
+    return is_this_node_identical and is_identical(x.left, y.left) and is_identical(x.right, y.right)
+
+
+def dfs(root: Node, target: Node, path: List[int]):
+    if root is None:
+        return False
+    path.append(root)
+    
+    if is_identical(root, target):
         return True
+
+    # use below lines instead of "is_identical" in techie delight compiler
+    # if root == target:
+    #     return True
+    
+    if dfs(root.left, target, path) or dfs(root.right, target, path):
+        return True
+
     path.pop()
     return False
 
 def all_ancestors(root: Node, x: Node):
     pathx = []
-    dfs(root, x.data, pathx)
+
+    if not root or not x:
+        return pathx
+
+    dfs(root, x, pathx)
+    
     if len(pathx) == 0:
         return []
+    
     pathx.reverse()
     
-    return pathx[1:len(pathx)]
+    return [r.data for r in pathx[1:len(pathx)]]
 
 if __name__=="__main__":
     tree = build_tree()
