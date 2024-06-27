@@ -73,31 +73,37 @@ def build_tree():
         )
     )
 
-def dfs(root: Node, path: List[int], result: List[List[int]]):
-    if not root:
-        return
-    
-    path.append(root.data)
-    
-    # if leaf node
-    if not root.left and not root.right:
-        result.append(path[:])
-        
-    dfs(root.left, path, result)
-    dfs(root.right, path, result)
-    path.pop()
-
 def max_sum_path(root: Node):
-    result = []
-    dfs(root, [], result)
+    if not root:
+        return []
+
     max_sum = float('-inf')
-    this_r = []
-    for a in result:
-        this_sum = sum(a)
-        if this_sum > max_sum:
-            max_sum = this_sum
-            this_r = a
-    return this_r
+    max_path = []
+
+    def dfs(node: Node, current_path: List[int], current_sum: int):
+        nonlocal max_sum, max_path
+
+        if not node:
+            return
+
+        current_path.append(node.data)
+        current_sum += node.data
+
+        # If it's a leaf node, update max_sum and max_path if necessary
+        if not node.left and not node.right:
+            if current_sum > max_sum:
+                max_sum = current_sum
+                max_path = current_path.copy()
+
+        # Explore left and right subtrees
+        dfs(node.left, current_path, current_sum)
+        dfs(node.right, current_path, current_sum)
+
+        # Backtrack
+        current_path.pop()
+
+    dfs(root, [], 0)
+    return max_path
 
 if __name__=="__main__":
     root = build_tree()
