@@ -81,7 +81,7 @@ def findMaximumSum(root: Node) -> int:
     # this will return INT_MIN but answer is 5 which is res1
     if root.left and root.right:
         return res[0]
-    return max(res, res1)
+    return max(res[0], res1)
 
 if __name__=="__main__":
     root = build_tree()
