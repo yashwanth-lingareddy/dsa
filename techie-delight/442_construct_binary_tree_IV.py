@@ -57,4 +57,3 @@ if __name__=="__main__":
     isLeaf = [0, 0, 1, 1, 0, 0, 1, 1, 1]
     ans = construct_binary_tree(preorder, isLeaf)
     print_tree(ans)
-
