@@ -59,7 +59,7 @@ def construct_binary_tree(inorder: List[int], levelorder: List[int]) -> Node:
             break
 
     # Construct left and right subtree
-    root.left = construct_binary_tree(inorder[0:io_index], levelorder)
+    root.left = construct_binary_tree(inorder[:io_index], levelorder)
     root.right = construct_binary_tree(inorder[io_index + 1:], levelorder)
     return root
 
